@@ -145,16 +145,16 @@ select {
   margin-right: 25px;
   margin-bottom: 10px;
   float: right;
-
 }
 
 
-/* #ufo-table th, td{
+#ufo-table th, td{
   border:2px solid #485563 !important;
-} */
+}
 
-#ufo-table tr {
-  /* height: 20px; */
+.notFound {
+  text-align: center;
+  color: #f5f1c0;
 }
 
 

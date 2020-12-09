@@ -1,18 +1,26 @@
 // from data.js
 const tableData = data;
-
+const notFound = "No UFO Sightings Matching the Criteria";
 
 function displayTable(rows){
     // Adding tbody into table and referencing tbody as Global variable
     window.tbody = d3.select("table").append("tbody");
-    console.log("tbody");
-    rows.forEach((UFOsighting) => {
-        let row = tbody.append("tr");
-        Object.entries(UFOsighting).forEach(([key, value]) => {
-            let cell = tbody.append("td");
-            cell.text(value);
+
+    if (rows === notFound){
+        tbody.append("tr").append("td")
+                                .attr("colspan", 7)
+                                .attr("class","notFound")
+                                .text(notFound);
+    }
+    else{
+        rows.forEach((UFOsighting) => {
+            let row = tbody.append("tr");
+            Object.entries(UFOsighting).forEach(([key, value]) => {
+                let cell = tbody.append("td");
+                cell.text(value);
+            });
         });
-    });
+    }
 }
 
 // Display full table on page load
@@ -32,7 +40,15 @@ submit.on("click", function(){
     
     let filteredData = tableData.filter(sightings => sightings.datetime == inputDate);
 
+    // Clearing table before appending filterd data rows
     tbody.remove();
-    displayTable(filteredData);
+
+    // Checking if matching rows are found
+    if(filteredData.length != 0) {
+        displayTable(filteredData);
+    }
+    else {
+        displayTable(notFound);
+    }
 })
  
