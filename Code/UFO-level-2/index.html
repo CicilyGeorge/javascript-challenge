@@ -5,7 +5,11 @@
   <meta charset="utf-8">
   <title>UFO Finder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <link rel="stylesheet" href="static/css/style.css">
@@ -37,12 +41,29 @@
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
-                        <label for="date">Enter a Date</label>
-                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2011">
+                        <label for="date">Date</label>
+                        <select class="form-control" id="datetime" tabindex="1"></select>
+                        <!-- <input class="form-control" id="datetime" type="text" placeholder="1/11/2011" tabindex="1"> -->
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="city">City</label>
+                        <select class="form-control" id="city" tabindex="2"></select>
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="state">State</label>
+                        <select class="form-control" id="state" tabindex="3"></select>
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="country">Country</label>
+                        <select class="form-control" id="country" tabindex="4"></select>
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="shape">Shape</label>
+                        <select class="form-control" id="shape" tabindex="5"></select>
                       </li>
                     </ul>
                   </div>
-                  <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
+                  <button id="filter-btn" type="submit" class="btn btn-default">Filter Table</button>
                 </form>
               </div>
             </div>
@@ -50,8 +71,8 @@
         </div>
         <div class="col-md-10">
           <div id="table-area" class="">
-            <table id="ufo-table" class="table table-striped table-hover">
-              <thead class="thead-dark">
+            <table id="ufo-table" class="table table-dark table-striped table-hover">
+              <thead>
                 <tr>
                   <th class="table-head">Date</th>
                   <th class="table-head">City</th>
