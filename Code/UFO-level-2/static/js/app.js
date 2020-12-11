@@ -219,3 +219,4 @@ clearBtn.on("click", function() {
     selectShape.selectAll('option').remove();
     loadDropdowns();
 });
+
