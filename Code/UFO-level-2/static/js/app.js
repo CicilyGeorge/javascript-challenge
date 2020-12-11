@@ -136,7 +136,7 @@ function Action(){
     if(inputState !== "") filters.state = inputState;
     if(inputCountry !== "") filters.country = inputCountry;
     if(inputShape !== "") filters.shape = inputShape;
-    console.log(filters.length);
+
     var filteredData = [];
     let i = 0;
 
@@ -167,16 +167,15 @@ function Action(){
         }
     });
     
-    
     // Clearing table before appending filterd data rows
     tbody.remove();
 
     // Checking if matching rows are found
-    if(filteredData.length != 0) {
+    if(filteredData.length !== 0) {
         displayTable(filteredData);
     }
-    else if (filters == []) {
-        console.log("empty");
+    // If there is no filters, loading the full table data
+    else if (Object.keys(filters).length === 0) {
         displayTable(tableData);
     }
     else {
@@ -196,23 +195,20 @@ loadDropdowns();
 
 // Select the form and form elements for filter
 const form = d3.select("#searchForm");
-// const submitBtn = d3.select("#filter-btn");
 const inputs = d3.selectAll(".form-control");
 
-// Calling the Action function on click and form submit events
-// submitBtn.on("click", Action);
+// Calling the Action function on change of inputs and form submit events
 form.on("submit",Action);
 inputs.on("change",Action);
 
 
 // Event handling on clear filter buton click
 const clearBtn = d3.select("#clr-btn");
-
 clearBtn.on("click", function() {
     // Prevent the page from refreshing
     d3.event.preventDefault();
 
-    // Clearing table and adding it
+    // Clearing table and loading it
     tbody.remove();
     displayTable(tableData);
     // Clearing dropdowns and adding them
