@@ -139,9 +139,22 @@ select {
   color: #8e979f;
 }
 
+.form-control {
+  padding: 0%;
+}
+
 #filter-btn { 
-  background-color: #485563;
-  border: 2px solid;
+  border: 1px solid;
+  border-radius: 8px;
+  margin-right: 25px;
+  margin-bottom: 10px;
+  float: right;
+}
+
+#clr-btn {
+  font-size: 0.9em;
+  padding: 5px;
+  border: 1px solid;
   border-radius: 8px;
   margin-right: 25px;
   margin-bottom: 10px;
@@ -159,28 +172,25 @@ select {
   color: #f5f1c0;
 }
 
-#dropdown_container {
-  width: 50%;
-}
-
-.selection {
-  width: 50%;
-}
 
 
 
 
 /* media queries which will only be activated at specific screen sizes */
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
   #filter-btn { 
     font-size: 0.9em;
     border-radius: 5px;
     margin-right: 2px;
     padding: 5px;
   }
-  .form-control { 
-    font-size: .8em;
+  #clr-btn {
+    font-size: 0.9em;
+    border-radius: 5px;
+    margin-right: 2px;
+    padding: 5px;
   }
+
 }
 
 @media (max-width: 800px) {
