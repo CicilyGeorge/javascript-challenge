@@ -1,103 +1,113 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>UFO Finder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
- <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
- <!-- Bootswatch template -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
- <!-- Local static css -->
- <link rel="stylesheet" href="static/css/style.css">
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel='stylesheet' href='static/css/style.css'>
+
+    <title>UFO Sightings Finder</title>
 </head>
 
 <body>
-  <div class="wrapper">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">UFO Sightings
-            <img class="nav-ufo" src="static/images/ufo.svg">
-          </a>
-        </div>
-      </div>
-    </nav>
-    <div class="hero text-center">
-      <h1>UFO Sightings</h1>
-      <p>The Truth is Out There</p>
-    </div>
-    <div class="container">
-      <div class="row margin-top-50">
-        <div class="col-md-2">
-          <aside class="filters">
-            <div class="panel panel-default">
-              <div class="panel-heading">Filter Search</div>
-              <div class="panel-body">
-                <form id="searchForm">
-                  <div class="form-group">
-                    <ul class="list-group" id="filters">
-                      <li class="filter list-group-item">
-                        <label for="date">Date</label>
-                        <select class="form-control" id="datetime" tabindex="1"></select>
-                      </li>
-                      <li class="filter list-group-item">
-                        <label for="city">City</label>
-                        <select class="form-control" id="city" tabindex="2"></select>
-                      </li>
-                      <li class="filter list-group-item">
-                        <label for="state">State</label>
-                        <select class="form-control" id="state" tabindex="3"></select>
-                      </li>
-                      <li class="filter list-group-item">
-                        <label for="country">Country</label>
-                        <select class="form-control" id="country" tabindex="4"></select>
-                      </li>
-                      <li class="filter list-group-item">
-                        <label for="shape">Shape</label>
-                        <select class="form-control" id="shape" tabindex="5"></select>
-                      </li>
-                    </ul>
+    <!-- navigation bar -->
+    <div class="wrapper">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <img class="nav-ufo" src="static/images/ufo.svg">
+                    <span id="nav-brand">UFO Sightings</span>
+                </a>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Banner -->
+        <div class="hero text-center">
+            <h1>UFO Sightings</h1>
+            <p>The Truth is Out There</p>
+        </div>    
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row margin-top-50">
+                <!-- Search Filter -->
+              <div class="col-lg-2 col-md-12">
+                <aside class="filters">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Filter Search</div>
+                    <div class="panel-body">
+                      <form id="searchForm">
+                        <div class="form-group">
+                          <ul class="list-group" id="filters">
+                            <li class="filter list-group-item">
+                              <label for="date">Date</label>
+                              <select class="form-control" id="datetime" tabindex="1"></select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="city">City</label>
+                              <select class="form-control" id="city" tabindex="2"></select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="state">State</label>
+                              <select class="form-control" id="state" tabindex="3"></select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="country">Country</label>
+                              <select class="form-control" id="country" tabindex="4"></select>
+                            </li>
+                            <li class="filter list-group-item">
+                              <label for="shape">Shape</label>
+                              <select class="form-control" id="shape" tabindex="5"></select>
+                            </li>
+                          </ul>
+                        </div>
+                        <button id="clr-btn" type="button" class="btn btn-light">Clear Filter</button>
+                      </form>
+                    </div>
                   </div>
-                  <button id="clr-btn" type="button" class="btn btn-default">Clear Filter</button>
-                </form>
+                </aside>
+              </div>
+              <!-- Data Table -->
+              <div class="col-lg-10 col-md-12">
+                <div id="table-area" class="">
+                  <table id="ufo-table" class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                      <tr>
+                        <th class="table-head">Date</th>
+                        <th class="table-head">City</th>
+                        <th class="table-head">State</th>
+                        <th class="table-head">Country</th>
+                        <th class="table-head">Shape</th>
+                        <th class="table-head">Duration</th>
+                        <th class="table-head">Comments</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </aside>
         </div>
-        <div class="col-md-10">
-          <div id="table-area" class="">
-            <table id="ufo-table" class="table table-dark table-hover">
-              <thead>
-                <tr>
-                  <th class="table-head">Date</th>
-                  <th class="table-head">City</th>
-                  <th class="table-head">State</th>
-                  <th class="table-head">Country</th>
-                  <th class="table-head">Shape</th>
-                  <th class="table-head">Duration</th>
-                  <th class="table-head">Comments</th>
-                </tr>
-              </thead>
-              
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
-    <footer class="footer">
-      <span class="bottom">UFO Sightings</span>
+    <!-- Footer -->
+    <footer class='footer'>
+        <span class="bottom">UFO Sightings</span>
     </footer>
-  </div>
-  <!-- D3 JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
-  <!-- Bootstrap jQuery and JS bundle w/ Popper.js -->
- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="static/js/data.js"></script>
-  <script src="static/js/app.js"></script>
+    </div>
+    
+    <!-- D3 JS-->
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+    <!-- JS under static folder -->
+    <script src="static/js/data.js"></script>
+    <script src="static/js/app.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
-
 </html>

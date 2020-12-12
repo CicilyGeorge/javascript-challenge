@@ -1,12 +1,13 @@
 // from data.js
 const tableData = data;
 const notFound = "No UFO Sightings Matching the Criteria";
+let tbody = d3.select("tbody");
 
 
-
+// /////////////////////////////////////////////////////////////////////////////
 function displayTable(rows){
     // Adding tbody into table and referencing tbody as Global variable
-    window.tbody = d3.select("table").append("tbody");
+    // window.tbody = d3.select("table").append("tbody");
 
     if (rows === notFound){
         tbody.append("tr").append("td")
@@ -18,7 +19,7 @@ function displayTable(rows){
         rows.forEach((UFOsighting) => {
             let row = tbody.append("tr");
             Object.entries(UFOsighting).forEach(([key, value]) => {
-                let cell = tbody.append("td");
+                let cell = row.append("td");
                 cell.text(value);
             });
         });
@@ -27,7 +28,7 @@ function displayTable(rows){
 
 
 
-
+// /////////////////////////////////////////////////////////////////////////////
 function loadDropdowns(){
     // Getting an array of dates in data
     let dateArray = tableData.map(sighting => sighting.datetime);
@@ -114,7 +115,7 @@ function loadDropdowns(){
 
 
 
-
+// /////////////////////////////////////////////////////////////////////////////
 // Action to perform on events
 function Action(){
     // Prevent the page from refreshing
@@ -145,7 +146,6 @@ function Action(){
             filteredData = tableData;
             i++;
         }
-
         switch (key) { 
             case "datetime":
                 filteredData = filteredData.filter(sightings => sightings.datetime == value);
@@ -165,10 +165,9 @@ function Action(){
             default:
                 filteredData = [];   
         }
-    });
-    
+    });  
     // Clearing table before appending filterd data rows
-    tbody.remove();
+    tbody.selectAll("tr").remove();
 
     // Checking if matching rows are found
     if(filteredData.length !== 0) {
@@ -183,7 +182,7 @@ function Action(){
     }
 }
 
-
+// /////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -202,6 +201,8 @@ form.on("submit",Action);
 inputs.on("change",Action);
 
 
+
+// /////////////////////////////////////////////////////////////////////////////
 // Event handling on clear filter buton click
 const clearBtn = d3.select("#clr-btn");
 clearBtn.on("click", function() {
@@ -209,7 +210,7 @@ clearBtn.on("click", function() {
     d3.event.preventDefault();
 
     // Clearing table and loading it
-    tbody.remove();
+    tbody.selectAll("tr").remove();
     displayTable(tableData);
     // Clearing dropdowns and adding them
     selectDate.selectAll('option').remove();
