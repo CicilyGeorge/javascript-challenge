@@ -1,7 +1,10 @@
 // from data.js
 const tableData = data;
+
+// Global declaration
 const notFound = "No UFO Sightings Matching the Criteria";
-let tbody = d3.select("tbody");
+const tbody = d3.select("tbody");
+const keys = Object.keys(tableData[0]).slice(0,5);
 
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -30,86 +33,27 @@ function displayTable(rows){
 
 // /////////////////////////////////////////////////////////////////////////////
 function loadDropdowns(){
-    // Getting an array of dates in data
-    let dateArray = tableData.map(sighting => sighting.datetime);
-    dateArray.push("");
-    // Converting the array into a set to keep unique city names
-    let dateList = d3.set(dateArray).values();
-    // Selecting the select element as a global variable and appending option tags
-    window.selectDate = d3.select("#datetime");
-    var options = selectDate.selectAll('option')
-                            .data(dateList)
-                            .enter()
-                            .append('option')
-                            .attr("value",(d) => d)
-                            .text((d) => d)
-                            .property("selected", (d) => d == "" );
-
-
-    // Getting an array of city names in data
-    let cityArray = tableData.map(sighting => sighting.city);
-    cityArray.push("");
-    // Converting the array into a set to keep unique city names
-    let cityList = d3.set(cityArray).values();
-    cityList = cityList.sort(d3.ascending);
-    // Selecting the select element as a global variable and appending option tags
-    window.selectCity = d3.select("#city");
-    var options = selectCity.selectAll('option')
-                            .data(cityList)
-                            .enter()
-                            .append('option')
-                            .attr("value",(c) => c)
-                            .text((c) => c)
-                            .property("selected", (d) => d == "" );
-
-
-    // Getting an array of state names in data
-    let stateArray = tableData.map(sighting => sighting.state);
-    stateArray.push("");
-    // Converting the array into a set to keep unique state names
-    let stateList = d3.set(stateArray).values();
-    stateList = stateList.sort(d3.ascending);
-    // Selecting the select element as a global variable and appending option tags
-    window.selectState = d3.select("#state");
-    var options = selectState.selectAll('option')
-                            .data(stateList)
-                            .enter()
-                            .append('option')
-                            .attr("value",(s) => s)
-                            .text((s) => s)
-                            .property("selected", (d) => d == "" );    
-                            
-    // Getting an array of country names in data
-    let countryArray = tableData.map(sighting => sighting.country);
-    countryArray.push("");
-    // Converting the array into a set to keep unique country names
-    let countryList = d3.set(countryArray).values();
-    countryList = countryList.sort(d3.ascending);
-    // Selecting the select element as a global variable and appending option tags
-    window.selectCountry = d3.select("#country");
-    var options = selectCountry.selectAll('option')
-                            .data(countryList)
-                            .enter()
-                            .append('option')
-                            .attr("value",(c) => c)
-                            .text((c) => c)
-                            .property("selected", (d) => d == "" );    
-                            
-    // Getting an array of shape names in data
-    let shapeArray = tableData.map(sighting => sighting.shape);
-    shapeArray.push("");
-    // Converting the array into a set to keep unique shape names
-    let shapeList = d3.set(shapeArray).values();
-    shapeList = shapeList.sort(d3.ascending);
-    // Selecting the select element as a global variable and appending option tags
-    window.selectShape = d3.select("#shape");
-    var options = selectShape.selectAll('option')
-                            .data(shapeList)
-                            .enter()
-                            .append('option')
-                            .attr("value",(s) => s)
-                            .text((s) => s)
-                            .property("selected", (d) => d == "" );   
+    
+    keys.forEach((key) => {
+        // Getting an array of dates in data
+        let dataArray = tableData.map(sighting => sighting[`${key}`]);
+        // Inserting a blank
+        dataArray.push("");
+        // Converting the array into a set to keep unique city names
+        let dataList = d3.set(dataArray).values();
+        // Sorting the list except for the datetime
+        if(key!== "datetime") {
+            dataList = dataList.sort(d3.ascending);
+        }
+        
+        var options = d3.select(`#${key}`).selectAll('option')
+                                .data(dataList)
+                                .enter()
+                                .append('option')
+                                .attr("value",(d) => d)
+                                .text((d) => d)
+                                .property("selected", (d) => d == "" );
+    });
 }
 
 
@@ -212,12 +156,10 @@ clearBtn.on("click", function() {
     // Clearing table and loading it
     tbody.selectAll("tr").remove();
     displayTable(tableData);
-    // Clearing dropdowns and adding them
-    selectDate.selectAll('option').remove();
-    selectCity.selectAll('option').remove();
-    selectState.selectAll('option').remove();
-    selectCountry.selectAll('option').remove();
-    selectShape.selectAll('option').remove();
-    loadDropdowns();
+
+    // Clearing dropdowns by selecting blank item
+    keys.forEach((key) => {
+        d3.select(`#${key}`).selectAll('option').property("selected", (d) => d == "" );
+    });
 });
 
